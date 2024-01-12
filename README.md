@@ -12,10 +12,11 @@ LiveSound offers simpliest codes and a user-friendly GUI, making it accessible f
 
 ### Play the local wavefile  
 
-    usage: play-local [-h] [-sd] [-spg] [-v] [-pf] [-cs CHUNK_SIZE]
+    usage: record-local [-h] [-gui] [-sd] [-tg] [-spg] [-sr SAMPLE_RATE] [-cs CHUNK_SIZE]
 
     optional arguments:
     -h,             --help                      show this help message and exit
+    -gui,           --use_gui                   open recorder GUI
     -sd,            --select_device             choose your output speaker device index
     -spg,           --set_post_gainSet          output speaker post gain (dB)
     -v,             --visiable                  open visiable screen

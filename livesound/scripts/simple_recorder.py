@@ -7,12 +7,19 @@ Created on Jan 05 2024
 import argparse
 from typing import Any
 
+from livesound.libs.gui import LiveSoundRecorder
 from livesound.libs.receiver import LiveRecorder
 
 
 def recorder(argv: Any = None):
     parser = argparse.ArgumentParser(
         description="This is a local audio recorder CLI program"
+    )
+    parser.add_argument(
+        "-gui",
+        "--use_gui",
+        action="store_true",
+        help="open recorder GUI",
     )
     parser.add_argument(
         "-sd",
@@ -41,35 +48,42 @@ def recorder(argv: Any = None):
 
     args = parser.parse_args(argv)
 
-    if args.select_device:
-        (device_idx2name, _) = LiveRecorder.get_all_devices()
-        print(device_idx2name)
-        device_id = int(input("Enter your device index: "))
-        print("=====" * 10)
-    else:
-        device_id = 0
-
-    runner = LiveRecorder(
-        sampling_rate=args.sample_rate,
-        record_channels=1,
-        stream_chunk_size=args.chunk_size,
-        device_index=device_id,
-    )
-
-    if args.set_pre_gain:
-        boost_gain = float(input("Enter the boost gain value: "))
-        print("=====" * 10)
-        runner.set_pre_gain(pre_gain_db=boost_gain)
-
-    if args.test_gain:
-        print("Please say 3 seconds speech to test your microphone gain")
-        print("normally we would control the overall gain around -20 dB")
-        input("Press Enter to start recording 3 seconds:")
-        print(
-            "Mic gain(dB)", round(runner.test_microphone_gain(record_length_sec=3), 2)
+    if args.use_gui:
+        runner = LiveSoundRecorder(
+            sampling_rate=args.sample_rate, stream_chunk_size=args.chunk_size
         )
-        print("=====" * 10)
 
-    save_to_where = input("Enter the save folder path: ")
-    input("Press Enter to start recording:")
-    runner.start_record(save_path=save_to_where)
+    else:
+        if args.select_device:
+            (device_idx2name, _) = LiveRecorder.get_all_devices()
+            print(device_idx2name)
+            device_id = int(input("Enter your device index: "))
+            print("=====" * 10)
+        else:
+            device_id = 0
+
+        runner = LiveRecorder(
+            sampling_rate=args.sample_rate,
+            record_channels=1,
+            stream_chunk_size=args.chunk_size,
+            device_index=device_id,
+        )
+
+        if args.set_pre_gain:
+            boost_gain = float(input("Enter the boost gain value: "))
+            print("=====" * 10)
+            runner.set_pre_gain(pre_gain_db=boost_gain)
+
+        if args.test_gain:
+            print("Please say 3 seconds speech to test your microphone gain")
+            print("normally we would control the overall gain around -20 dB")
+            input("Press Enter to start recording 3 seconds:")
+            print(
+                "Mic gain(dB)",
+                round(runner.test_microphone_gain(record_length_sec=3), 2),
+            )
+            print("=====" * 10)
+
+        save_to_where = input("Enter the save folder path: ")
+        input("Press Enter to start recording:")
+        runner.start_record(save_path=save_to_where)
