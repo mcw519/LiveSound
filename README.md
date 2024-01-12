@@ -16,7 +16,6 @@ LiveSound offers simpliest codes and a user-friendly GUI, making it accessible f
 
     optional arguments:
     -h,             --help                      show this help message and exit
-    -gui,           --use_gui                   open recorder GUI
     -sd,            --select_device             choose your output speaker device index
     -spg,           --set_post_gainSet          output speaker post gain (dB)
     -v,             --visiable                  open visiable screen
@@ -30,6 +29,7 @@ LiveSound offers simpliest codes and a user-friendly GUI, making it accessible f
 
     optional arguments:
     -h,                 --help                      show this help message and exit
+    -gui,               --use_gui                   open recorder GUI
     -sd,                --select_device             choose your microphone device index
     -tg,                --test_gain                 test microphone average gain (dB)
     -spg,               --set_pre_gain              set microphone pre gain (dB)
