@@ -75,12 +75,12 @@ class LivePlayer:
         self.stream.close()
         print(f"Closed the stream. {time.asctime(time.localtime(time.time()))}")
 
-    def process_chunk(self):
+    def process_chunk(self, data):
         """
         Implement signal algo here
         """
         # DO SOMTHING HERE
-        pass
+        return data
 
     def play_local_wavfile(
         self, file_path: str, loop_play: bool = False, visiable: bool = False
@@ -97,7 +97,10 @@ class LivePlayer:
         warray, self.sr = soundfile.read(
             file_path,
         )
-        self.n_channels = warray.shape[1]
+        if warray.ndim == 1:
+            warray = np.expand_dims(warray, axis=1)
+
+        self.n_channels = warray.shape[1]        
         warray = warray.astype(np.float32) * self.spk_post_gain
         max_value = np.max(np.abs(warray))
 
@@ -124,7 +127,7 @@ class LivePlayer:
             data = warray[
                 i * self.stream_chunk_size : (i + 1) * self.stream_chunk_size, ...
             ]
-            data = self.process_chunk()
+            data = self.process_chunk(data)
             self.stream.write(data.tobytes())
             if visiable:
                 time_line.set_xdata(
