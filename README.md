@@ -17,7 +17,7 @@ LiveSound offers simpliest codes and a user-friendly GUI, making it accessible f
     optional arguments:
     -h,             --help                      show this help message and exit
     -sd,            --select_device             choose your output speaker device index
-    -spg,           --set_post_gainSet          output speaker post gain (dB)
+    -spg,           --set_post_gain          output speaker post gain (dB)
     -v,             --visiable                  open visiable screen
     -pf,            --play_folder               play all waveform (*.wav) inside the folder
     -cs CHUNK_SIZE, --chunk_size CHUNK_SIZE     stream chunk buffer size
