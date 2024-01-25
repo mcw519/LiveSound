@@ -206,7 +206,7 @@ class LiveSoundRecorder(LiveRecorder):
         soundfile.write(
             f"./media/{fname}.wav",
             recorded_wav.squeeze(),
-            16000,
+            self.sr,
         )
 
         # reinit buffer for next recording
