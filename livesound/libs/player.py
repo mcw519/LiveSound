@@ -6,7 +6,7 @@ Created on Jan 12 2024
 """
 
 import time
-from typing import Optional, Tuple
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -100,7 +100,7 @@ class LivePlayer:
         if warray.ndim == 1:
             warray = np.expand_dims(warray, axis=1)
 
-        self.n_channels = warray.shape[1]        
+        self.n_channels = warray.shape[1]
         warray = warray.astype(np.float32) * self.spk_post_gain
         max_value = np.max(np.abs(warray))
 

@@ -1,37 +1,59 @@
-# LiveSound
+# LiveSound - Professional Audio Recording Tool 🎵
 
-LiveSound offers simpliest codes and a user-friendly GUI, making it accessible for everyone to capture and record the captivating sounds of their live experiences.
+English | [繁體中文](README_zh.md)
 
-## Installation
+A Python-based audio recording application with GUI and CLI interfaces.
 
-    git clone <project-url>
-    python setup.py install
+## ✨ Key Features
 
+- 🎙️ **High-Quality Recording**: Multi-sample rate and channel support
+- 🖥️ **Dual Interface**: Both GUI and CLI modes
+- 📊 **Real-time Monitoring**: Audio level visualization
+- 🔧 **Professional Features**: Gain control, device selection
+- 📈 **Quality Assessment**: Integrated DNSMOS audio quality evaluation
 
-## CLI tools
+## 🚀 Quick Start
 
-### Play the local wavefile  
+### Installation
+```bash
+git clone https://github.com/mcw519/LiveSound.git
+cd LiveSound
+pip install -r requirements.txt
+pip install -e .
+```
 
-    usage: record-local [-h] [-gui] [-sd] [-tg] [-spg] [-sr SAMPLE_RATE] [-cs CHUNK_SIZE]
+### Usage
 
-    optional arguments:
-    -h,             --help                      show this help message and exit
-    -sd,            --select_device             choose your output speaker device index
-    -spg,           --set_post_gain          output speaker post gain (dB)
-    -v,             --visiable                  open visiable screen
-    -pf,            --play_folder               play all waveform (*.wav) inside the folder
-    -cs CHUNK_SIZE, --chunk_size CHUNK_SIZE     stream chunk buffer size
+#### GUI Mode
+```bash
+livesound-record --gui
+```
 
+#### CLI Mode
+```bash
+# Basic recording
+livesound-record
 
-### Record a wavefile through device microphone
+# Custom settings
+livesound-record --output-dir ./recordings --sample-rate 44100 --channels 2
+```
 
-    usage: record-local [-h] [-sd] [-tg] [-spg] [-sr SAMPLE_RATE] [-cs CHUNK_SIZE]
+## 📋 Main Options
 
-    optional arguments:
-    -h,                 --help                      show this help message and exit
-    -gui,               --use_gui                   open recorder GUI
-    -sd,                --select_device             choose your microphone device index
-    -tg,                --test_gain                 test microphone average gain (dB)
-    -spg,               --set_pre_gain              set microphone pre gain (dB)
-    -sr SAMPLE_RATE,    --sample_rate SAMPLE_RATE   recording sample rate
-    -cs CHUNK_SIZE,     --chunk_size CHUNK_SIZE     stream chunk buffer size
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--gui` | Launch GUI mode | CLI mode |
+| `--output-dir` | Output directory | `./recordings` |
+| `--sample-rate` | Sample rate | 44100 Hz |
+| `--channels` | Number of channels | 1 |
+| `--device-index` | Audio device index | Default device |
+| `--list-devices` | List audio devices | - |
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) file for details
+
+### Third-Party Components
+- **DNSMOS Models**: From [Microsoft DNS-Challenge](https://github.com/microsoft/DNS-Challenge)
+- **License**: MIT License (Microsoft Corporation)
+- **Full License Info**: See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)

@@ -1,4 +1,7 @@
-pytest
 numpy
 pyaudio
 soundfile
+librosa
+onnxruntime
+matplotlib
+Pillow
